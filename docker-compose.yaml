@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    entrypoint: dockerize -wait tcp://db:5432 -timeout 40s ./.docker/entrypoint.sh
+    container_name: nestapiproducts
+    ports:
+      - 3002:3001
+    volumes:
+      - .:/home/node/app
+    depends_on: 
+      - db
+
+  db:
+    build: .docker/postgres
+    container_name: nestapiproductsdb
+    restart: always
+    tty: true
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=storeprod
+    volumes:
+      - .docker/dbdata:/var/lib/postgresql/data
+  grpc-test:
+    image: gusaul/grpcox:latest
+    ports:
+      - "6969:6969"
