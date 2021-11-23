@@ -25,6 +25,7 @@
 ## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+para rodar a aplicacao executar subir a api com o comando docker-compose up e apos rodar o projeto basta ir na documentacao da api que se encontra em localhost/apidocs
 
 ## Installation
 
